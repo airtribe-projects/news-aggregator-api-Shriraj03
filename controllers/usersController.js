@@ -7,10 +7,15 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const signup = async (req, res) => {
   try {
+    console.log(" Signup request body:", req.body );
+    
     const { name, email, password,preferences } = req.body;
+    console.log(" Preferences:", preferences ,"name:", name, "email:", email );
 
     // Validation
     if (!name || !email || !password) {
+      console.log(" Missing required fields");
+      
       return res.status(400).json({ message: "Name, email, and password are required" });
     }
 
@@ -53,7 +58,9 @@ const login = async (req, res) => {
     const payload={ email: dbUser.email};
     token= jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 
-     return res.status(200).json(token);
+     //return res.status(200).json(token);
+     return res.status(200).json({ token });
+
 
 }
 const updatePreferences = async (req, res) => {
@@ -92,9 +99,9 @@ const getPreferences = async (req, res) => {
   try {
     const userEmail = req.user.email; // from JWT
 
-    if (!userEmail) {
-      return res.status(401).json({ error: "Invalid token" });
-    }
+    // if (!userEmail) {
+    //   return res.status(401).json({ error: "Invalid token" });
+    // }
 
     const dbUser = await usersModel.findOne(
       { email: userEmail },

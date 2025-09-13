@@ -8,8 +8,8 @@ const validateJWT = require("../middleware/authorizationMiddleware");
 
 router.post("/signup", signup);
 router.post("/login", login);
-router.get("/getPreferences",validateJWT, getPreferences);
-router.put("/updatePreferences",validateJWT, updatePreferences);
+router.get("/preferences",validateJWT, getPreferences);
+router.put("/preferences",validateJWT, updatePreferences);
 
 
 module.exports = router;
