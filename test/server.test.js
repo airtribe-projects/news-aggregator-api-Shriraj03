@@ -5,7 +5,7 @@ const server = supertest(app);
 
 const mockUser = {
     name: 'Clark Kent',
-    email: 'clark@superman.com',
+    email: 'clarrki@superman.com',
     password: 'Krypt()n8',
     preferences:['movies', 'comics']
 };
@@ -16,6 +16,8 @@ let token = '';
 
 tap.test('POST /users/signup', async (t) => { 
     const response = await server.post('/users/signup').send(mockUser);
+    console.log(response.body  );
+    
     t.equal(response.status, 200);
     t.end();
 });
@@ -49,7 +51,7 @@ tap.test('POST /users/login with wrong password', async (t) => {
     t.end();
 });
 
-// Preferences tests
+// // Preferences tests
 
 tap.test('GET /users/preferences', async (t) => {
     const response = await server.get('/users/preferences').set('Authorization', `Bearer ${token}`);
